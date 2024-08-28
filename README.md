@@ -65,10 +65,10 @@ python manage.py shell -c "from django.contrib.auth.models import User; u = User
 ```
 
 ### 5. Access the Admin Panel
-Open your browser and navigate to http://localhost:8000/admin/ to access the Django admin panel. Log in using the superuser credentials created earlier.
+Open your browser and navigate to [admin/](http://localhost:8000/admin/) to access the Django admin panel. Log in using the superuser credentials created earlier.
 
 ### 6. Access the API Documentation
-Open your browser and navigate to http://localhost:8000/api/docs/ to access the API documentation.
+Open your browser and navigate to [api/docs/](http://localhost:8000/api/docs/) to access the API documentation.
 
 ### Linting and Code Quality
 To ensure code quality, you can run the following linting commands:
@@ -93,27 +93,10 @@ Alternatively, manually run:
 ```bash
 python manage.py test
 ```
-
-### Notes
-* Ensure PostgreSQL or another database is set up if you are not using SQLite.
-* Modify the fixtures/data.json file as needed to include initial data for the project.
-* For production deployment, additional steps such as setting up a web server (e.g., Gunicorn) and configuring a production database will be required.
 ### Contributing
 If you would like to contribute to the project, please fork the repository and submit a pull request with your changes. Ensure all tests pass and adhere to the project's coding standards.
 
 ### License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
-For further information, please refer to the Django documentation.
-### Key Sections
-
-- **Overview**: Describes what the project is about.
-- **Requirements**: Lists the prerequisites for running the project.
-- **Setup**: Provides instructions on setting up the environment, applying migrations, and running the server.
-- **Linting and Code Quality**: Details how to ensure code quality.
-- **Running Tests**: Instructions for running tests.
-- **Notes**: Additional setup or configuration notes.
-- **Contributing**: Guidelines for contributing to the project.
-- **License**: Licensing information.
-
-Feel free to adjust the repository URL, any specific setup instructions, or additional notes as needed for your project.
+For further information, please refer to the [Django Documentation](https://docs.djangoproject.com/en/5.1/).
