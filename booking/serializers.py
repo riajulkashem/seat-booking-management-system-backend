@@ -68,10 +68,6 @@ class BookingSerializer(serializers.ModelSerializer):
         if datetime.strptime(booking_date, "%Y-%m-%d").date() <= now.date():
             raise serializers.ValidationError("Booking date must be in the future.")
 
-        # Check if booking time is in the future
-        if datetime.strptime(booking_time, "%H:%M:%S").time() <= now.time():
-            raise serializers.ValidationError("Booking time must be in the future.")
-
         # Check if the guest name is not empty
         if not guest_name:
             raise serializers.ValidationError("Guest name cannot be empty.")
