@@ -8,6 +8,7 @@ MANAGE := $(PYTHON) manage.py
 setup_project:
 	python3 -m venv $(VENV)
 	$(PIP) install -r requirements.txt
+	$(MANAGE) migrate
 	$(MANAGE) loaddata fixtures/data.json
 
 # Run the Django development server

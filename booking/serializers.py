@@ -23,7 +23,6 @@ class SeatSerializer(serializers.ModelSerializer):
         fields = ["id", "venue", "seat_number"]
 
     def validate(self, data: dict) -> dict:
-        # Assuming `guest_name`, `booking_date`, and `seat` are passed in the data
         seat_number = self.context["request"].data.get("seat_number")
         venue = data.get("venue")
 
