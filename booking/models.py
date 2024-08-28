@@ -1,7 +1,8 @@
 from datetime import datetime
+
 from django.core.exceptions import ValidationError
-from django.utils import timezone
 from django.db import models
+from django.utils import timezone
 
 
 class Venue(models.Model):
@@ -19,7 +20,6 @@ class Venue(models.Model):
 class Seat(models.Model):
     venue = models.ForeignKey(Venue, related_name="seats", on_delete=models.CASCADE)
     seat_number = models.CharField(max_length=10)
-    is_available = models.BooleanField(default=True)
 
     def __str__(self) -> str:
         return f"{self.venue.name} - {self.seat_number}"

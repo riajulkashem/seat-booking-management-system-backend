@@ -5,9 +5,10 @@ PIP := $(VENV)/bin/pip
 MANAGE := $(PYTHON) manage.py
 
 # Setup virtual environment and install dependencies
-install:
+setup_project:
 	python3 -m venv $(VENV)
 	$(PIP) install -r requirements.txt
+	$(MANAGE) loaddata fixtures/data.json
 
 # Run the Django development server
 run:

@@ -1,9 +1,11 @@
+from datetime import timedelta
+
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.test import TestCase
-from booking.models import Booking, Seat, Venue
 from django.utils import timezone
-from datetime import timedelta
+
+from booking.models import Booking, Seat, Venue
 
 
 class BookingTestCase(TestCase):
@@ -95,9 +97,7 @@ class VenueTestCase(TestCase):
 
     def test_prevent_duplicate_venue_names(self) -> None:
         Venue.objects.create(name="Unique Venue", address="123 Test St")
-        with self.assertRaises(
-            Exception
-        ):  # Change to specific exception if uniqueness enforced
+        with self.assertRaises(IntegrityError):
             Venue.objects.create(name="Unique Venue", address="789 Test Ave")
 
     def test_venue_name_length(self) -> None:
@@ -119,9 +119,7 @@ class SeatTestCase(TestCase):
 
     def test_create_seat_with_duplicate_seat_number_same_venue(self) -> None:
         Seat.objects.create(venue=self.venue1, seat_number="A1")
-        with self.assertRaises(
-            IntegrityError
-        ):
+        with self.assertRaises(IntegrityError):
             Seat.objects.create(venue=self.venue1, seat_number="A1")
 
     def test_create_seat_with_duplicate_seat_number_different_venues(self) -> None:

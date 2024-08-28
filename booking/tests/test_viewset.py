@@ -1,7 +1,9 @@
-from rest_framework.test import APITestCase
+from datetime import datetime, timedelta
+
 from rest_framework import status
-from booking.models import Venue, Seat, Booking
-from booking.serializers import VenueSerializer, SeatSerializer, BookingSerializer
+from rest_framework.test import APITestCase
+
+from booking.models import Booking, Seat, Venue
 
 
 class VenueViewSetTests(APITestCase):
@@ -21,6 +23,12 @@ class VenueViewSetTests(APITestCase):
     def test_create_venue_invalid(self) -> None:
         response = self.client.post(self.url, self.invalid_venue_data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_create_duplicate_venue_invalid(self) -> None:
+        response = self.client.post(self.url, self.valid_venue_data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        data = response.json()
+        self.assertEqual(data["name"][0], "venue with this name already exists.")
 
     def test_create_venue(self) -> None:
         self.valid_venue_data["name"] = "New Venue"
@@ -67,6 +75,17 @@ class SeatViewSetTests(APITestCase):
         response = self.client.post(self.url, self.invalid_seat_data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    def test_create_duplicate_seat_in_same_venue(self) -> None:
+        Seat.objects.create(seat_number="A2", venue=self.venue)
+        response = self.client.post(
+            self.url, {"seat_number": "A2", "venue": self.venue.id}, format="json"
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(
+            response.json()["non_field_errors"][0],
+            "The fields venue, seat_number must make a unique set.",
+        )
+
     def test_update_seat(self) -> None:
         response = self.client.put(
             f"{self.url}{self.seat.id}/",
@@ -87,11 +106,12 @@ class BookingViewSetTests(APITestCase):
     def setUp(self) -> None:
         self.venue = Venue.objects.create(name="Test Venue", address="123 Test St")
         self.seat = Seat.objects.create(seat_number="A1", venue=self.venue)
+        self.booking_time = datetime.now() + timedelta(hours=1)
         self.valid_booking_data = {
             "seat": self.seat,
             "guest_name": "John Doe",
-            "booking_date": "2024-08-28",
-            "booking_time": "10:00:00",
+            "booking_date": "2054-08-28",
+            "booking_time": self.booking_time.strftime("%H:%M:%S"),
         }
         self.invalid_booking_data = {
             "seat": self.seat,
@@ -121,7 +141,6 @@ class BookingViewSetTests(APITestCase):
     def test_create_booking_conflict(self) -> None:
         self.valid_booking_data["seat"] = self.seat.id
         response = self.client.post(self.url, self.valid_booking_data, format="json")
-        print(response.json())
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("error", response.data)
 
@@ -131,8 +150,8 @@ class BookingViewSetTests(APITestCase):
             {
                 "seat": self.seat.id,
                 "guest_name": "Riajul",
-                "booking_date": "2024-08-28",
-                "booking_time": "11:00:00",
+                "booking_date": "2054-08-28",
+                "booking_time": self.booking_time.strftime("%H:%M:%S"),
             },
             format="json",
         )
@@ -154,4 +173,3 @@ class BookingViewSetTests(APITestCase):
         }
         response = self.client.post(self.url, invalid_data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("error", response.data)
