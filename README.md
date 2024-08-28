@@ -4,18 +4,12 @@
 
 The Seat Booking Management System Backend is a Django-based application. This README provides information on how to set up, run, and maintain the project.
 
-## Features
-
-- **Manage Venues**: Add and update venue details.
-- **Manage Seats**: Create and manage seats for each venue.
-- **Booking System**: Allow users to book seats and prevent double bookings.
 
 ## Requirements
 
 - Python 3.12.5+
 - Django 5.1+
 - Django Rest Framework
-- PostgreSQL or SQLite (default)
 
 ## Setup
 
