@@ -28,3 +28,8 @@ lint:
 # Run Django tests
 test:
 	$(MANAGE) test
+
+# createsuperuser with username: rk and passwork: rk
+create_test_superuser:
+	$(MANAGE) createsuperuser --username=rk --email=rk@mail.com --noinput
+	$(MANAGE) shell -c "from django.contrib.auth.models import User; u = User.objects.get(username='rk'); u.set_password('rk'); u.save()"
