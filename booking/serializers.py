@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Venue, Seat, Booking
+
+from .models import Booking, Seat, Venue
 
 
 class VenueSerializer(serializers.ModelSerializer):
@@ -20,7 +21,7 @@ class BookingSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "seat",
-            "user_name",
+            "guest_name",
             "booking_date",
             "booking_time",
             "created_at",

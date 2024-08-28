@@ -1,10 +1,11 @@
 from typing import Any, Dict
+
+from rest_framework import status, viewsets
 from rest_framework.request import Request
-from rest_framework import viewsets
-from .models import Venue, Seat, Booking
-from .serializers import VenueSerializer, SeatSerializer, BookingSerializer
-from rest_framework import status
 from rest_framework.response import Response
+
+from .models import Booking, Seat, Venue
+from .serializers import BookingSerializer, SeatSerializer, VenueSerializer
 
 
 class VenueViewSet(viewsets.ModelViewSet):

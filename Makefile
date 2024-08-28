@@ -22,7 +22,7 @@ migrate:
 lint:
 	$(VENV)/bin/flake8 .
 	$(VENV)/bin/black .
-	$(VENV)/bin/mypy .
+	$(VENV)/bin/mypy . --exclude 'migrations'
 	$(VENV)/bin/isort .
 
 # Run Django tests

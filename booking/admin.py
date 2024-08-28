@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Venue, Seat, Booking
+
+from .models import Booking, Seat, Venue
 
 
 class BookingAdmin(admin.ModelAdmin):
