@@ -1,0 +1,576 @@
+openapi: 3.0.3
+info:
+  title: Seat Booking API
+  version: 1.0.0
+  description: Seat Booking API for a test project
+paths:
+  /api/bookings/:
+    get:
+      operationId: bookings_list
+      tags:
+      - bookings
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+          description: ''
+    post:
+      operationId: bookings_create
+      tags:
+      - bookings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Booking'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Booking'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+          description: ''
+  /api/bookings/{id}/:
+    get:
+      operationId: bookings_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this booking.
+        required: true
+      tags:
+      - bookings
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+          description: ''
+    put:
+      operationId: bookings_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this booking.
+        required: true
+      tags:
+      - bookings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Booking'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Booking'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+          description: ''
+    patch:
+      operationId: bookings_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this booking.
+        required: true
+      tags:
+      - bookings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBooking'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBooking'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBooking'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+          description: ''
+    delete:
+      operationId: bookings_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this booking.
+        required: true
+      tags:
+      - bookings
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/seats/:
+    get:
+      operationId: seats_list
+      tags:
+      - seats
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Seat'
+          description: ''
+    post:
+      operationId: seats_create
+      tags:
+      - seats
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Seat'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Seat'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Seat'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Seat'
+          description: ''
+  /api/seats/{id}/:
+    get:
+      operationId: seats_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this seat.
+        required: true
+      tags:
+      - seats
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Seat'
+          description: ''
+    put:
+      operationId: seats_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this seat.
+        required: true
+      tags:
+      - seats
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Seat'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Seat'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Seat'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Seat'
+          description: ''
+    patch:
+      operationId: seats_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this seat.
+        required: true
+      tags:
+      - seats
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSeat'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSeat'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSeat'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Seat'
+          description: ''
+    delete:
+      operationId: seats_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this seat.
+        required: true
+      tags:
+      - seats
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/venues/:
+    get:
+      operationId: venues_list
+      tags:
+      - venues
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Venue'
+          description: ''
+    post:
+      operationId: venues_create
+      tags:
+      - venues
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Venue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Venue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Venue'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+          description: ''
+  /api/venues/{id}/:
+    get:
+      operationId: venues_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue.
+        required: true
+      tags:
+      - venues
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+          description: ''
+    put:
+      operationId: venues_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue.
+        required: true
+      tags:
+      - venues
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Venue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Venue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Venue'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+          description: ''
+    patch:
+      operationId: venues_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue.
+        required: true
+      tags:
+      - venues
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVenue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedVenue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedVenue'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+          description: ''
+    delete:
+      operationId: venues_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this venue.
+        required: true
+      tags:
+      - venues
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Booking:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        seat:
+          type: integer
+        guest_name:
+          type: string
+          maxLength: 100
+        booking_date:
+          type: string
+          format: date
+        booking_time:
+          type: string
+          format: time
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - booking_date
+      - booking_time
+      - created_at
+      - guest_name
+      - id
+      - seat
+    PatchedBooking:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        seat:
+          type: integer
+        guest_name:
+          type: string
+          maxLength: 100
+        booking_date:
+          type: string
+          format: date
+        booking_time:
+          type: string
+          format: time
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedSeat:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        venue:
+          type: integer
+        seat_number:
+          type: string
+          maxLength: 10
+    PatchedVenue:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        address:
+          type: string
+    Seat:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        venue:
+          type: integer
+        seat_number:
+          type: string
+          maxLength: 10
+      required:
+      - id
+      - seat_number
+      - venue
+    Venue:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        address:
+          type: string
+      required:
+      - address
+      - id
+      - name
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
